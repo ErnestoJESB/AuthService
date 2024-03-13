@@ -27,7 +27,6 @@ export default class PostService {
       const json = await fetch(url + 'Users/' + id)
       const response = await json.json()
       this.user.value = await response
-      console.log(this.user.value[0])
     } catch (error) {
       console.log(error)
     }
