@@ -30,7 +30,7 @@ const handleSubmit = () => {
         name: name.value,
         email: email.value,
         password: password.value,
-        address: group.value
+        group: group.value
     };
     service.postData(formData);
 }

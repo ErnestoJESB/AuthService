@@ -1,7 +1,7 @@
 import type IUser from '@/interfaces/IUser'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-const url = 'http://localhost:3000/'
+const url = 'https://2d55-201-134-180-250.ngrok-free.app/'
 const url2 = 'http://172.16.107.202:3000/'
 // const url2 = 'https://jsonplaceholder.typicode.com/'
 
@@ -24,20 +24,28 @@ export default class PostService {
   async fetchPost(id: string): Promise<void> {
     try {
       console.log(id)
-      const json = await fetch(url + 'Users/' + id)
+      const json = await fetch(url + 'user?email=' + id, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'ngrok-skip-browser-warning': '0'
+        }
+      })
       const response = await json.json()
       this.user.value = await response
+      console.log(this.user.value)
     } catch (error) {
       console.log(error)
     }
   }
 
-  /* async postData(data: any) {
-    fetch(url + 'crearusuario', {
+  async postData(data: any) {
+    fetch(url + 'register', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        'Content-type': 'application/json; charset=UTF-8'
+        'Content-type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '0'
       }
     })
       .then((res) => {
@@ -47,14 +55,13 @@ export default class PostService {
         console.log(error)
       })
   }
-   */
-
-  async postData(data: any) {
-    fetch(url + 'register', {
+  async login(data: any) {
+    fetch(url + 'login', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        'Content-type': 'application/json; charset=UTF-8'
+        'Content-type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '0'
       }
     })
       .then((res) => {
@@ -67,7 +74,13 @@ export default class PostService {
 
   async fetchAll(): Promise<void> {
     try {
-      const json = await fetch(url + 'Users')
+      const json = await fetch(url + 'Users', {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'ngrok-skip-browser-warning': '0'
+        }
+      })
       const response = await json.json()
       this.users.value = await response
     } catch (error) {
