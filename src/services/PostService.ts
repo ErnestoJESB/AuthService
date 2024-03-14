@@ -65,7 +65,7 @@ export default class PostService {
       }
     })
       .then((res) => {
-        alert(res)
+        alert('Estás logeado')
       })
       .catch((error) => {
         console.log(error)
