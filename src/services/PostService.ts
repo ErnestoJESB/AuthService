@@ -56,21 +56,26 @@ export default class PostService {
         alert(error)
       })
   }
-  async login(data: any) {
-    fetch(url + 'login', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'ngrok-skip-browser-warning': '0'
+  async login(data: any): Promise<void> {
+    try {
+      const login = new Request(url + '/login', {
+        method: 'POST',
+        headers: {
+          'ngrok-skip-browser-warning': '0',
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+      })
+      const response: any = await fetch(login)
+      const json = await response.json()
+      localStorage.setItem('Neto', json.token)
+      if (json.token) {
+        alert('Iniciaste sesión correctamente')
       }
-    })
-      .then((res: any) => {
-        alert('Estás logeado' + res.token)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+      console.log(json.token)
+    } catch (error) {
+      alert('No iniciaste sesión' + error)
+    }
   }
 
   async fetchAll(): Promise<void> {
