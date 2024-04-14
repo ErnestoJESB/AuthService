@@ -1,8 +1,9 @@
 import type IUser from '@/interfaces/IUser'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-const url = 'https://2d55-201-134-180-250.ngrok-free.app/'
+// const url = 'https://2d55-201-134-180-250.ngrok-free.app/'
 const url2 = 'http://172.16.107.202:3000/'
+const url = 'http://localhost:3000/'
 // const url2 = 'https://jsonplaceholder.typicode.com/'
 
 export default class PostService {
@@ -52,7 +53,7 @@ export default class PostService {
         alert(res)
       })
       .catch((error) => {
-        console.log(error)
+        alert(error)
       })
   }
   async login(data: any) {
@@ -64,8 +65,8 @@ export default class PostService {
         'ngrok-skip-browser-warning': '0'
       }
     })
-      .then((res) => {
-        alert('Estás logeado')
+      .then((res: any) => {
+        alert('Estás logeado' + res.token)
       })
       .catch((error) => {
         console.log(error)
